@@ -87,10 +87,37 @@ ORDER BY cost;
 
 
 
+--------------------------------------------------------------------------------------------
 
+-- топ пользователь за промежуток 
+SELECT 
+    SUM(o.finalcost) AS TotalRevenue,
+    c.login AS _name
+FROM 
+    _order o
+JOIN 
+    _client c ON o.id_client = c.id
+WHERE 
+    o.date BETWEEN '2023-01-01' AND '2023-12-31'
+GROUP BY 
+    c.login;
 
+-- топ районов
 
+SELECT 
+    A.name AS AreaName,
+    COUNT(O.id) AS OrderCount
+FROM _order O
+    JOIN _area A ON O.id_aria = A.id
+GROUP BY A.name
+ORDER BY OrderCount DESC;
 
+-- общая выручка за промежуток 
+
+select
+SUM(finalcost) AS TotalRevenue
+FROM _order
+WHERE date BETWEEN '2023-01-01' AND '2023-12-31';
 
 
 
